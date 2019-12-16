@@ -14,6 +14,8 @@ if(funcName === 'GET'){
             console.log(users)
         } else if (usersARGV === 'user') {
             console.log(users[index])
+        } else if (usersARGV === 'friends') {
+            console.log(users[index].friends)
         }
     })
 } 
