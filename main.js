@@ -6,16 +6,14 @@ const userName = process.argv
 const index = process.argv[4]
 
 
-if(funcName === 'GET' && usersARGV === 'users'){
+if(funcName === 'GET'){
     fs.readFile('./users.json', function(error, data) {
-        const users = JSON.parse(data)
-        console.log(users)
+        const users = JSON.parse(data);
+
+        if (usersARGV === 'users') {
+            console.log(users)
+        } else if (usersARGV === 'user') {
+            console.log(users[index])
+        }
     })
 } 
-
-if(funcName === 'GET' && usersARGV ==='user'){
-    fs.readFile('./users.json', function(error, data) {
-        const user = JSON.parse(data)
-        console.log(user[index])
-    })
-}
