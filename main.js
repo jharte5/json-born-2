@@ -7,6 +7,10 @@ const index = process.argv[4]
 
 if (funcName === 'GET') {
     fs.readFile('./users.json', function(error, data) {
+        if (error) {
+            throw error;
+        }
+
         const users = JSON.parse(data);
 
         if (usersARGV === 'users') {
@@ -21,6 +25,10 @@ if (funcName === 'GET') {
 
 if (funcName === 'POST') {
     fs.readFile('./users.json', function(error, data) {
+        if (error) {
+            throw error;
+        }
+
         const users = JSON.parse(data);
         const addedUser = {
             "index": users.length,
@@ -39,15 +47,19 @@ if (funcName === 'POST') {
             users.push(addedUser);
             const newUserList = JSON.stringify(users, null, 2);
 
-            fs.writeFile('users.json', newUserList, function(err) {
-                if(err) throw err;
+            fs.writeFile('users.json', newUserList, (err) => {
+                if (err) {
+                    throw err;
+                };
             })
         } else if (usersARGV === 'friends') {
             users[index].friends.push(newFriend);
             const newFriendList = JSON.stringify(users, null, 2);
 
-            fs.writeFile('users.json', newFriendList, function(err) {
-                if(err) throw err;
+            fs.writeFile('users.json', newFriendList, (err) => {
+                if (err) {
+                    throw err;
+                }
             })
         }
     })
@@ -55,13 +67,16 @@ if (funcName === 'POST') {
 
 if (funcName === 'PUT') {
     fs.readFile('./users.json', function(error, data) {
+        if (error) {
+            throw error;
+        }
         const users = JSON.parse(data);
         const newValue = process.argv[6];
 
         users[index][process.argv[5]] = newValue;
         const updateUsers = JSON.stringify(users, null, 2)
 
-        fs.writeFile('users.json', updateUsers, function(err) {
+        fs.writeFile('users.json', updateUsers, (err) => {
             if(err) throw err;
         })
     })
@@ -69,11 +84,14 @@ if (funcName === 'PUT') {
 
 if (funcName === 'DELETE') {
     fs.readFile('./users.json', function(error, data) {
+        if (error) {
+            throw error;
+        }
         const users = JSON.parse(data);
         users.splice(index, 1);
         const deletedUser = JSON.stringify(users, null, 2)
 
-        fs.writeFile('users.json', deletedUser, function(err) {
+        fs.writeFile('users.json', deletedUser, (err) => {
             if(err) throw err;
         })
     })
